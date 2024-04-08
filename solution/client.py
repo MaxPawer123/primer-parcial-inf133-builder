@@ -15,44 +15,34 @@ mi_characters = {
 }
 response = requests.post(url, json=mi_characters, headers=headers)
 print(response.json())
-response = requests.get(url)
+#response = requests.get(url)
+#print(response.json())
+#POST
+mi_characters = {
+    "name": "Robin",
+    "level": 5,
+    "role": "Archer",
+    "charisma": 10,
+    "strength": 10 ,
+    "dexterity": 10
+    
+}
+response = requests.post(url, json=mi_characters, headers=headers)
+
+response = requests.get(f"{url}/{1}")
 print(response.json())
 
+
 mi_characters = {
-    "name": "Robin",
-    "level": 5,
-    "role": "Archer",
-    "charisma": 10,
-    "strength": 10 ,
-    "dexterity": 10
+    "name": "Juan",
+    "level": 12,
+    "role": "Inge",
+    "charisma": 20,
+    "strength": 30 ,
+    "dexterity": 30
     
 }
 response = requests.post(url, json=mi_characters, headers=headers)
-
-#response = requests.get(f"{url}/{1}")
-#print(response.json())
-
-
-mi_characters = {
-    "name": "Robin",
-    "level": 5,
-    "role": "Archer",
-    "charisma": 10,
-    "strength": 10 ,
-    "dexterity": 10
-    
-}
-response = requests.post(url, json=mi_characters, headers=headers)
-
-
-# GET /
-
-print("Listar a los pacientes que tienen diagnostico de Diabetes")
-ruta_get = url + " ?role=Archer&level=5&charisma=10 "
-get_response = requests.get( url=ruta_get)
-print(get_response.text)
-
-
 
 
 
@@ -64,6 +54,33 @@ edit_character= {
 }
 response = requests.put(f"{url}/{2}", json=edit_character, headers=headers)
 print(response.json())
+
+
+
+print("--- DELETE pacinte ---")
+ci = 3
+response_delete = requests.delete(f"{url}/{ci}")
+print(response_delete.json())
+mi_characters = {
+    "name": "Legolas",
+    "level": 5,
+    "role": "Archer",
+    "charisma": 15,
+    "strength": 10,
+    "dexterity": 10
+    
+}
+response = requests.post(url, json=mi_characters, headers=headers)
+print(response.json())
+
+response = requests.get(url)
+print(response.json())
+
+
+
+
+
+
 
 
 """

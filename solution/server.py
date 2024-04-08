@@ -87,6 +87,8 @@ class CharacterService:
         return [character for character in self.characters if character['rol'] == rol and character['level']==level and character['charisma']==charisma]
     
     
+    
+    
     def update_character(self, index, post_data):
         if index in characters:
             character = characters[index]
@@ -148,25 +150,24 @@ class CharacterHandler(BaseHTTPRequestHandler):
         parsed_url = urlparse(self.path)
         query_params = parse_qs(parsed_url.query)
         
-        # Listar todos los pacientes
         if self.path == "/characters":
             response_data = self.controller.read_characters()
             HTTPDataHandler.handle_response(self, 200, response_data)
-        
-        # Listar a los pacientes que tienen diagnóstico específico
-        elif self.path.startswith("/characters") and "rol"and "level" and "charisma" in query_params:            
-            rol = query_params["rol"][0]
-            level = query_params["level"][1]
-            charisma = query_params["charisma"][2]
+         
+        elif self.path.startswith("/characters") and "rol" and "level" and "charisma" in query_params:            
+            rol = query_params["rol"][3]
+            level = query_params["level"][4]
+            charisma = query_params["charisma"][5]
             characters_solucion = self.controller.read_characters_por_rol_level_charisma(rol,level,charisma)                
             if characters_solucion:
                 HTTPDataHandler.handle_response(self, 200, characters_solucion)
             else:
                 HTTPDataHandler.handle_response(self, 204, [])  
+        
         else:
             HTTPDataHandler.handle_response(self, 404, {"Error": "Ruta no existente"})
 
-
+        
 
       #split es una cadena es partir las cadenas 
     def do_PUT(self): #actulir por id 
